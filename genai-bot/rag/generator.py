@@ -28,7 +28,6 @@ Answer:
 """
     return prompt.strip()
 
-
 # -----------------------------
 # Generate Answer
 # -----------------------------
