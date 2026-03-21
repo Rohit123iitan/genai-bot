@@ -2,19 +2,15 @@ import os
 import sqlite3
 import numpy as np
 from sentence_transformers import SentenceTransformer
+from config import Config
 
-# -----------------------------
-# Configuration
-# -----------------------------
-DB_PATH = "db/embeddings.db"
-DOCS_PATH = "data/docs/"
-MODEL_NAME = "all-MiniLM-L6-v2"
-CHUNK_SIZE = 500
+# Load configuration from Config class
+DB_PATH = Config.DB_PATH
+DOCS_PATH = Config.DOCS_PATH
+MODEL_NAME = Config.MODEL_NAME
+CHUNK_SIZE = Config.CHUNK_SIZE
 
-
-# -----------------------------
 # Load Embedding Model
-# -----------------------------
 model = SentenceTransformer(MODEL_NAME)
 
 
