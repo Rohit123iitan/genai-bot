@@ -6,9 +6,9 @@ from config import Config
 model = SentenceTransformer(Config.MODEL_NAME)
 
 
-# -----------------------------
+# ---------------------------------------------------------------------------------------------------
 # Load Embeddings from DB -> Load all document chunks and their embeddings from the SQLite database.
-# -----------------------------
+# ---------------------------------------------------------------------------------------------------
 def load_embeddings():
     conn = sqlite3.connect(Config.DB_PATH)
     cursor = conn.cursor()
