@@ -62,10 +62,6 @@ def generate_answer(context, query, history=""):
 # Generate Summary -> Create a concise summary of the given text using the LLM.
 # ------------------------------------------------------------------------------
 def generate_summary(text: str):
-    """
-    Summarize given text using LLM.
-    """
-
     if not text.strip():
         return "Nothing to summarize."
 

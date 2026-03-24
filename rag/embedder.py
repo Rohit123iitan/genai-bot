@@ -4,12 +4,10 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 from config import Config
 
-# Load configuration
 DB_PATH = Config.DB_PATH
 DOCS_PATH = Config.DOCS_PATH
 MODEL_NAME = Config.MODEL_NAME
 CHUNK_SIZE = Config.CHUNK_SIZE
-
 model = SentenceTransformer(MODEL_NAME)
 # ----------------------------------------------------------------------------------------------
 # Initialize Database and Table -> Create SQLite database and table if not exists.
@@ -22,7 +20,7 @@ def init_db():
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS document_chunks (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                source TEXT,          -- 🔥 unified field for retriever
+                source TEXT,         
                 content TEXT,
                 embedding BLOB
             )
@@ -38,7 +36,6 @@ def init_db():
 # Text Chunking -> Split documents into fixed-size chunks.
 # -----------------------------------------------------------------------------
 def chunk_text(text, chunk_size=CHUNK_SIZE):
-    """Split text into fixed-size chunks."""
     return [
         text[i:i + chunk_size]
         for i in range(0, len(text), chunk_size)
