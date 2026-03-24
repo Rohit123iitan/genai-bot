@@ -1,20 +1,45 @@
 <div align="center">
 
-# GenAI RAG Discord Bot
+# 🤖 GenAI RAG Discord Bot
 
 **A production-ready Discord bot powered by Retrieval-Augmented Generation**
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/71ee3c9a-1518-4158-84cc-e1d905474feb" alt="Banner Image" width="600">
+</p>
+
+<p align="center">
+  <a href="https://github.com/your-username/your-repo/issues"><img src="https://img.shields.io/github/issues/your-username/your-repo"></a> 
+  <a href="https://github.com/your-username/your-repo/stargazers"><img src="https://img.shields.io/github/stars/your-username/your-repo"></a>
+  <a href="https://github.com/your-username/your-repo/network/members"><img src="https://img.shields.io/github/forks/your-username/your-repo"></a>
+  <a href="https://github.com/your-username/your-repo/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg"></a>
+</p>
+
+<p align="center">
+  <a href="#-features">Features</a> |
+  <a href="#%EF%B8%8F-tech-stack">Tech Stack</a> |
+  <a href="#-installation">Installation</a> |
+  <a href="#-project-structure">Project Structure</a> |
+  <a href="#-contributing">Contributing</a> |
+  <a href="#%EF%B8%8F-author">Author</a>
+</p>
+
+---
+
+### 💡 Project Overview
 Query your own documents through Discord — grounded answers, source citations,  
 per-user conversation memory, and interaction-scoped caching. Fully local. No paid APIs.
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
-[![Discord.py](https://img.shields.io/badge/Discord.py-2.x-5865F2?logo=discord&logoColor=white)](https://discordpy.readthedocs.io/)
-[![Ollama](https://img.shields.io/badge/LLM-Ollama-black)](https://ollama.com/)
-[![SQLite](https://img.shields.io/badge/DB-SQLite-003B57?logo=sqlite&logoColor=white)](https://www.sqlite.org/)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
-
 </div>
 
+### 🛠️ Tech Stack
+
+<p align="left">
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white"></a>
+  <a href="https://discordpy.readthedocs.io/"><img src="https://img.shields.io/badge/Discord.py-2.x-5865F2?logo=discord&logoColor=white"></a>
+  <a href="https://ollama.com/"><img src="https://img.shields.io/badge/LLM-Ollama-black"></a>
+  <a href="https://www.sqlite.org/"><img src="https://img.shields.io/badge/DB-SQLite-003B57?logo=sqlite&logoColor=white"></a>
+</p>
 ---
 
 ## Table of Contents
