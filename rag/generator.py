@@ -1,20 +1,19 @@
 import requests
 from config import Config
 
-# -----------------------------
+# ----------------------------------------------------------------------------------------------
 # Build Prompt -> Create a structured prompt for the LLM based on context, query, and history.
-# -----------------------------
+# ----------------------------------------------------------------------------------------------
 def build_prompt(context_chunks, query, history=""):
     return f"""You are a direct and highly knowledgeable expert assistant. 
 
 Your task is to answer the user's question by synthesizing the provided context_chunks.
 
 Follow these core guidelines:
-1. Speak as an Expert: Answer confidently in your own voice. State the facts directly without referencing your sources (e.g., instead of "The context says the sky is blue," simply state "The sky is blue.").
-2. Maximize the context_chunks: Extract and piece together the most useful information from the context_chunks, even if it appears messy, fragmented, or incomplete. 
-3. Stay Focused: Be concise and directly address the user's query.
-4. Use History for Flow: Only use the chat history to understand pronouns or conversational references. Base your factual answers entirely on the context.
-5. DO NOT use introductory filler words.
+1. Maximize the context_chunks: Extract and piece together the most useful information from the context_chunks, even if it appears messy, fragmented, or incomplete. 
+2. Stay Focused: Be concise and directly address the user's query.
+3. Use History for Flow: Only use the chat history to understand pronouns or conversational references. Base your factual answers entirely on the context.
+4. DO NOT use introductory filler words.
 <context>
 {context_chunks}
 </context>
