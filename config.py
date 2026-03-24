@@ -6,9 +6,9 @@ load_dotenv()
 
 
 class Config:
-    # -----------------------------
+    # -----------------------------------------------------------------------------------------------
     # Validation -> Validate critical configuration values and provide user-friendly error messages.
-    # -----------------------------
+    # -----------------------------------------------------------------------------------------------
     @staticmethod
     def validate():
         if not Config.DISCORD_TOKEN:

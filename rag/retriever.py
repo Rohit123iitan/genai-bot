@@ -36,10 +36,9 @@ def load_embeddings():
     return contents, np.vstack(vectors), sources
 
 
-# -------------------------------------------------------------------------------------
-# Retrieval Function -> Given a query, retrieve the most relevant document chunks 
-# based on cosine similarity.
-# -------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------
+# Retrieval Function -> Given a query, retrieve the most relevant document chunks based on cosine similarity.
+# ----------------------------------------------------------------------------------------------------------------
 def retrieve(query, top_k=None, return_scores=False):
     top_k = top_k or Config.TOP_K
 
