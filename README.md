@@ -95,7 +95,7 @@ User Input (!ask / !summarize)
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 genai-bot/
@@ -124,7 +124,7 @@ genai-bot/
 
 ---
 
-## Setup
+## ⚙️ Setup
 
 ### Prerequisites
 
