@@ -67,6 +67,7 @@ GenAI RAG Discord Bot lets you drop documents into a folder and query them insta
 
 ## 🏗️ Architecture
 
+```
 User Input (!ask / !summarize)
            │
            ▼
@@ -90,10 +91,11 @@ User Input (!ask / !summarize)
      │     Generator (Ollama)
      │           ▼
      └────► Response + Sources
+```
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 genai-bot/
@@ -286,7 +288,7 @@ The cache key is an MD5 hash of the **normalized query combined with the user's 
 
 ### Source citations
 
-The retriever returns chunk metadata — document filename and position — alongside the retrieved text. The generator passes this through to the bot handler, which appends a `Sources:` footer to every response. Cached responses preserve their original source list unchanged.
+The retriever returns chunk metadata — document filename and position — alongside the retrieved text. The generator passes this through to the bot handler, which appends a `📚 Sources:` footer to every response. Cached responses preserve their original source list unchanged.
 
 ### `!summarize` scoping
 
@@ -359,6 +361,19 @@ This triggers when you have no interaction history in the current session. Use `
 | Conversation memory | Python `collections.deque(maxlen=3)` — in-process, per-user |
 | Response cache | In-process dict keyed by `hash(query + last 3 interactions + user_id)` |
 | Language | Python 3.10+ |
+
+---
+
+## Roadmap
+
+- [ ] Persist conversation memory to SQLite across restarts
+- [ ] FAISS or ChromaDB for faster vector retrieval
+- [ ] Slash command support (`/ask`, `/summarize`, `/help`)
+- [ ] Support for `.pdf` and `.docx` document ingestion
+- [ ] Configurable memory window size via `.env`
+- [ ] Per-guild document isolation for multi-server deployments
+- [ ] Web UI for document management
+- [ ] Cloud deployment guide (Railway / Fly.io)
 
 ---
 
