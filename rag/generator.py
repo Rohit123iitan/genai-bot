@@ -1,9 +1,8 @@
 import requests
 from config import Config
 
-
 # -----------------------------
-# Build Prompt (UPDATED)
+# Build Prompt -> Create a structured prompt for the LLM based on context, query, and history.
 # -----------------------------
 def build_prompt(context_chunks, query, history=""):
     return f"""You are a direct and highly knowledgeable expert assistant. 
@@ -31,16 +30,10 @@ Follow these core guidelines:
 Expert Answer:
 """
 
-
-
-# -----------------------------
-# Generate Answer (UPDATED)
-# -----------------------------
+# ------------------------------------------------------------------------------
+# Generate Answer -> Send the prompt to the LLM and return the generated answer.
+# -------------------------------------------------------------------------------
 def generate_answer(context, query, history=""):
-    """
-    Generate answer using context + history.
-    """
-
     if not context:
         return "No relevant information found."
 
@@ -66,10 +59,9 @@ def generate_answer(context, query, history=""):
     except requests.exceptions.RequestException as e:
         return f"Request failed: {str(e)}"
 
-
-# -----------------------------
-# Generate Summary (NEW)
-# -----------------------------
+# -----------------------------------------------------------------------------
+# Generate Summary -> Create a concise summary of the given text using the LLM.
+# ------------------------------------------------------------------------------
 def generate_summary(text: str):
     """
     Summarize given text using LLM.
@@ -89,7 +81,6 @@ Text:
 
 Summary:
 """
-
     try:
         response = requests.post(
             Config.OLLAMA_URL,

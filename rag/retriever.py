@@ -3,14 +3,11 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 from config import Config
 
-# -----------------------------
-# Load Embedding Model
-# -----------------------------
 model = SentenceTransformer(Config.MODEL_NAME)
 
 
 # -----------------------------
-# Load Embeddings from DB
+# Load Embeddings from DB -> Load all document chunks and their embeddings from the SQLite database.
 # -----------------------------
 def load_embeddings():
     conn = sqlite3.connect(Config.DB_PATH)
@@ -35,45 +32,33 @@ def load_embeddings():
 
     if len(vectors) == 0:
         return [], np.array([]), []
-
+    
     return contents, np.vstack(vectors), sources
 
 
-# -----------------------------
-# Retrieval Function (UPDATED)
-# -----------------------------
+# -------------------------------------------------------------------------------------
+# Retrieval Function -> Given a query, retrieve the most relevant document chunks 
+# based on cosine similarity.
+# -------------------------------------------------------------------------------------
 def retrieve(query, top_k=None, return_scores=False):
-    """
-    Return top-k relevant chunks with content + source.
-    """
-
     top_k = top_k or Config.TOP_K
 
     contents, embeddings, sources = load_embeddings()
 
     if embeddings.size == 0:
         return []
-
-    # Encode query (normalized for cosine similarity)
     query_vec = model.encode(query, normalize_embeddings=True)
-
-    # Compute similarity
     scores = np.dot(embeddings, query_vec)
 
-    # Top-k indices
     top_indices = scores.argsort()[-top_k:][::-1]
 
     results = []
-    
     for i in top_indices:
         item = {
             "content": contents[i],
             "source": sources[i],
         }
-
         if return_scores:
             item["score"] = float(scores[i])
-
         results.append(item)
-    
     return results

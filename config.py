@@ -7,29 +7,19 @@ load_dotenv()
 
 class Config:
     # -----------------------------
-    # Validation
+    # Validation -> Validate critical configuration values and provide user-friendly error messages.
     # -----------------------------
     @staticmethod
     def validate():
-        """Validate critical configuration values and provide user-friendly error messages."""
-
-        # Check Discord token
         if not Config.DISCORD_TOKEN:
             raise ValueError("DISCORD_TOKEN is missing in .env file")
-
-        # Ensure DB directory exists
+        
         db_dir = os.path.dirname(Config.DB_PATH)
         os.makedirs(db_dir, exist_ok=True)
-
-        # Warn if docs folder missing
         if not os.path.exists(Config.DOCS_PATH):
             print(f"Warning: Docs folder not found → {Config.DOCS_PATH}")
 
-    # -----------------------------
-    # Paths
-    # -----------------------------
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
     DB_PATH = os.getenv(
         "DB_PATH",
         os.path.join(BASE_DIR, "db", "embeddings.db")
@@ -40,23 +30,14 @@ class Config:
         os.path.join(BASE_DIR, "data", "docs")
     )
 
-    # -----------------------------
-    # Embedding Model
-    # -----------------------------
     MODEL_NAME = os.getenv(
         "MODEL_NAME",
         "all-MiniLM-L6-v2"
     )
 
-    # -----------------------------
-    # RAG Parameters
-    # -----------------------------
     CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", 500))
     TOP_K = int(os.getenv("TOP_K", 3))
 
-    # -----------------------------
-    # LLM (Ollama)
-    # -----------------------------
     OLLAMA_URL = os.getenv(
         "OLLAMA_URL",
         "http://localhost:11434/api/generate"
@@ -67,14 +48,8 @@ class Config:
         "mistral"
     )
 
-    # -----------------------------
-    # Discord Bot
-    # -----------------------------
     DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 
-    # -----------------------------
-    # Logging
-    # -----------------------------
     LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
     
     

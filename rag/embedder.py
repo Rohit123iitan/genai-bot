@@ -10,24 +10,15 @@ DOCS_PATH = Config.DOCS_PATH
 MODEL_NAME = Config.MODEL_NAME
 CHUNK_SIZE = Config.CHUNK_SIZE
 
-# Load Embedding Model
 model = SentenceTransformer(MODEL_NAME)
-
-
-# -----------------------------
-# Initialize Database (UPDATED)
-# -----------------------------
+# ----------------------------------------------------------------------------------------------
+# Initialize Database and Table -> Create SQLite database and table if not exists.
+# ----------------------------------------------------------------------------------------------
 def init_db():
-    """Create SQLite database and table if not exists."""
-
     try:
         os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
-
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
-
-        print("✅ Connected to SQLite database")
-
         cursor.execute("""
             CREATE TABLE IF NOT EXISTS document_chunks (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -43,25 +34,19 @@ def init_db():
     except Exception as e:
         print(f"Database initialization failed: {e}")
         return None
-
-
-# -----------------------------
-# Text Chunking
-# -----------------------------
+# -----------------------------------------------------------------------------
+# Text Chunking -> Split documents into fixed-size chunks.
+# -----------------------------------------------------------------------------
 def chunk_text(text, chunk_size=CHUNK_SIZE):
     """Split text into fixed-size chunks."""
     return [
         text[i:i + chunk_size]
         for i in range(0, len(text), chunk_size)
     ]
-
-
-# -----------------------------
-# Process Documents (UPDATED)
-# -----------------------------
+# -----------------------------------------------------------------------------
+# Process Documents -> Read documents, create embeddings, and store in DB.
+# ------------------------------------------------------------------------------
 def process_documents():
-    """Read documents, create embeddings, and store in DB."""
-
     conn = init_db()
     if not conn:
         return
@@ -94,10 +79,6 @@ def process_documents():
         for chunk in chunks:
             if not chunk.strip():
                 continue
-
-            # -----------------------------
-            # Generate embedding
-            # -----------------------------
             embedding = model.encode(
                 chunk,
                 normalize_embeddings=True
@@ -106,9 +87,6 @@ def process_documents():
             embedding = np.array(embedding, dtype=np.float32)
             embedding_bytes = embedding.tobytes()
 
-            # -----------------------------
-            # Store in DB (UPDATED)
-            # -----------------------------
             cursor.execute(
                 """
                 INSERT INTO document_chunks (source, content, embedding)
@@ -119,9 +97,6 @@ def process_documents():
 
     conn.commit()
     conn.close()
-
-    print("✅ Documents processed and stored successfully.")
-
 
 if __name__ == "__main__":
     process_documents()
